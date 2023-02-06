@@ -63,5 +63,7 @@ jobs:
               key: ${{ secrets.SSH_PRIVATE_KEY }}
               port: 22
               script: |
+                ls
+                pwd
                 docker-compose --file docker-compose.yml down;
                 docker-compose --file docker-compose.yml up -d;
