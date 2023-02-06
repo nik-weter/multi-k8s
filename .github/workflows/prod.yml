@@ -13,8 +13,6 @@ jobs:
             uses: actions/checkout@v2
           - name: bulds
             run: |
-              ls
-              pwd
               docker build -t nik-weter/react-test -f ./client/Dockerfile.dev ./client
           - name: Run the build process with Docker
             run: |
@@ -28,23 +26,36 @@ jobs:
             uses: docker/build-push-action@v3
             with:
               context: ./client
-              push: false
+              push: true
               tags: nikweter/multi-client:latest
           - name: Build and push server
             uses: docker/build-push-action@v3
             with:
               context: ./server
-              push: false
-              tags: nikweter/multi-client:latest
+              push: true
+              tags: nikweter/multi-server:latest
           - name: Build and push worker
             uses: docker/build-push-action@v3
             with:
               context: ./worker
-              push: false
+              push: true
               tags: nikweter/multi-worker:latest
           - name: Build and push nginx
             uses: docker/build-push-action@v3
             with:
               context: ./nginx
-              push: false
+              push: true
               tags: nikweter/multi-nginx:latest
+ deploy:
+      name: deploy to server
+      runs-on: ubuntu-latest
+      steps:
+          - name: Deploy app
+            uses: appleboy/ssh-action@master
+            with:
+              host: riss.fabrika-start.ru
+              username: root
+              key: ${{ secrets.SSH_PRIVATE_KEY }}
+              port: 22
+              script: |
+                docker-compose up -d
