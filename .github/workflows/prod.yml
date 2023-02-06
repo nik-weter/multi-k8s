@@ -51,6 +51,8 @@ jobs:
       name: deploy to server
       runs-on: ubuntu-latest
       steps:
+          - name: Check out the repo
+            uses: actions/checkout@v2
           - name: Deploy app
             uses: appleboy/ssh-action@master
             with:
@@ -59,5 +61,5 @@ jobs:
               key: ${{ secrets.SSH_PRIVATE_KEY }}
               port: 22
               script: |
-                echo ${{ secrets.DOCKER_COMPOSE }} > docker-compose.yml
+#                echo ${{ secrets.DOCKER_COMPOSE }} > docker-compose.yml
                 docker-compose up -d
