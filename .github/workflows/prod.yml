@@ -47,6 +47,7 @@ jobs:
               push: true
               tags: nikweter/multi-nginx:latest
   deploy:
+      needs: test
       name: deploy to server
       runs-on: ubuntu-latest
       steps:
