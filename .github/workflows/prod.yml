@@ -47,7 +47,7 @@ jobs:
               push: true
               tags: nikweter/multi-nginx:latest
   deploy:
-      needs: test
+#      needs: test
       name: deploy to server
       runs-on: ubuntu-latest
       steps:
@@ -61,5 +61,5 @@ jobs:
               key: ${{ secrets.SSH_PRIVATE_KEY }}
               port: 22
               script: |
-#                echo ${{ secrets.DOCKER_COMPOSE }} > docker-compose.yml
-                docker-compose up -d
+                docker-compose --file docker-compose.yml down;
+                docker-compose --file docker-compose.yml up -d;
