@@ -54,27 +54,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
-#          - name: Deploy app
-#            uses: appleboy/ssh-action@master
-#            with:
-#              host: riss.fabrika-start.ru
-#              username: root
-#              key: ${{ secrets.SSH_PRIVATE_KEY }}
-#              port: 22
-#              script: |
-#                ls
-#                pwd
-#                docker-compose --file docker-compose.yml down;
-
-#                docker-compose --file docker-compose.yml up ;
-      - name: Docker-Compose Remote Deployment
-        uses: wshihadeh/docker-deployment-action@v1          
+         uses: actions/checkout@v2
+      - name: Deploy app
+        uses: appleboy/ssh-action@master
         with:
-            remote_docker_host: riss.fabrika-start.ru
-            ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-            ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
-            deployment_mode: docker-compose
-            args: up -d
-            docker_prune: 'true'
-            pull_images_first: 'true'            
+          host: riss.fabrika-start.ru
+          username: root
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            cd /root/compex
+            docker-compose --file docker-compose.yml down
+            docker-compose --file docker-compose.yml up 
