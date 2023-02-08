@@ -68,11 +68,11 @@ jobs:
 #                docker-compose --file docker-compose.yml down;
 
 #                docker-compose --file docker-compose.yml up ;
- - uses: alex-ac/github-action-ssh-docker-compose@master
-      name: Docker-Compose Remote Deployment
-      with:
-        ssh_host: riss.fabrika-start.ru
-        ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-        ssh_user: ${{ secrets.SSH_USER }
-        docker_compose_prefix: complex
-        docker_compose_down: 'true'                
+           - uses: alex-ac/github-action-ssh-docker-compose@master
+                name: Docker-Compose Remote Deployment
+                with:
+                  ssh_host: riss.fabrika-start.ru
+                  ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+                  ssh_user: ${{ secrets.SSH_USER }
+                  docker_compose_prefix: complex
+                  docker_compose_down: 'true'                
