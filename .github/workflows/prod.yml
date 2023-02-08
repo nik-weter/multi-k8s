@@ -69,10 +69,12 @@ jobs:
 
 #                docker-compose --file docker-compose.yml up ;
       - name: Docker-Compose Remote Deployment
-          uses: alex-ac/github-action-ssh-docker-compose@master
-          with:
-            ssh_host: riss.fabrika-start.ru
+        uses: wshihadeh/docker-deployment-action@v1          
+        with:
+            remote_docker_host: riss.fabrika-start.ru
             ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-            ssh_user: ${{ secrets.SSH_USER }
-            docker_compose_prefix: complex
-            docker_compose_down: 'true'                
+            ssh_public_key: ${{ secrets.SSH_PUBLIC_KEY }}
+            deployment_mode: docker-compose
+            args: up -d
+            docker_prune: 'true'
+            pull_images_first: 'true'            
