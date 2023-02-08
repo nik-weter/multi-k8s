@@ -63,6 +63,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            cd /root/compex
+            cd /root/complex
             docker-compose --file docker-compose.yml down
-            docker-compose --file docker-compose.yml up 
+            docker-compose --file docker-compose.yml pull
+            docker-compose --file docker-compose.yml up -d
