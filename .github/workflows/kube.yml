@@ -1,0 +1,14 @@
+---
+name: kube
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+- uses: jtalk/k8s-deploy@v2
+  with:
+    namespace: 'default'
+    manifests: |
+        k8s
+    kubectl-version: 'latest'
