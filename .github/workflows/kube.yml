@@ -6,9 +6,8 @@ on:
     branches:
       - master
 jobs:
-- uses: jtalk/k8s-deploy@v2
+- uses: danielr1996/kubectl-action@1.0.0
+  name: Deploy
   with:
-    namespace: 'default'
-    manifests: |
-        k8s
-    kubectl-version: 'latest'
+    kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    args: apply -f k8s
